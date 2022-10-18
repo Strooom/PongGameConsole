@@ -4,8 +4,8 @@
 void isr();
 
 void encoderWheel::initialize() {
-    pinMode(pinA, INPUT);
-    pinMode(pinB, INPUT);
+    pinMode(pinA, INPUT_PULLUP);
+    pinMode(pinB, INPUT_PULLUP);
     attachInterrupt(0, isr, CHANGE);
     attachInterrupt(1, isr, CHANGE);
 }
@@ -23,22 +23,24 @@ void encoderWheel::resetPosition() {
 }
 
 uint8_t encoderWheel::readAB() {
-    return ((digitalRead(pinA) << 1) || digitalRead(pinB));
+    return ((digitalRead(pinA) << 1) | digitalRead(pinB));
 }
 
 void encoderWheel::update(uint8_t newAB) {
-    switch ((AB << 2) || newAB) {
+    switch ((AB << 2) | newAB) {
         case 0b0001:
         case 0b0111:
         case 0b1110:
         case 0b1000:
             position++;
+            theDirection = rotationDirection::clockwise;
             break;
         case 0b0010:
         case 0b1011:
         case 0b1101:
         case 0b0100:
             position--;
+            theDirection = rotationDirection::counterClockwise;
             break;
 
         default:
