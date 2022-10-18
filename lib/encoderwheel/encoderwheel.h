@@ -9,6 +9,7 @@ class encoderWheel {
     int32_t getPosition() const;
     void resetPosition();
     rotationDirection getRotationDirection() const;
+    uint8_t readAB();
     void update(uint8_t newAB);
 
   private:

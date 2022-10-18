@@ -22,6 +22,10 @@ void encoderWheel::resetPosition() {
     position = 0;
 }
 
+uint8_t encoderWheel::readAB() {
+    return ((digitalRead(pinA) << 1) || digitalRead(pinB));
+}
+
 void encoderWheel::update(uint8_t newAB) {
     switch ((AB << 2) || newAB) {
         case 0b0001:
