@@ -10,6 +10,12 @@ void encoderWheel::initialize() {
     attachInterrupt(1, isr, CHANGE);
 }
 
+bool encoderWheel::positionHasChanged() {
+    bool result     = positionChanged;
+    positionChanged = false;
+    return result;
+}
+
 int32_t encoderWheel::getPosition() const {
     return position;
 }
@@ -33,14 +39,16 @@ void encoderWheel::update(uint8_t newAB) {
         case 0b1110:
         case 0b1000:
             position++;
-            theDirection = rotationDirection::clockwise;
+            theDirection    = rotationDirection::clockwise;
+            positionChanged = true;
             break;
         case 0b0010:
         case 0b1011:
         case 0b1101:
         case 0b0100:
             position--;
-            theDirection = rotationDirection::counterClockwise;
+            theDirection    = rotationDirection::counterClockwise;
+            positionChanged = true;
             break;
 
         default:

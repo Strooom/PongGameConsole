@@ -6,7 +6,8 @@
 class encoderWheel {
   public:
     void initialize();
-    int32_t getPosition() const;
+    bool positionHasChanged();
+        int32_t getPosition() const;
     void resetPosition();
     rotationDirection getRotationDirection() const;
     uint8_t readAB();
@@ -18,5 +19,6 @@ class encoderWheel {
     uint8_t AB{0};          // value of A and B : 00, 01, 10, 11
 
     int32_t position{0};
+    bool positionChanged{false};
     rotationDirection theDirection{rotationDirection::clockwise};
 };
