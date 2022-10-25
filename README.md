@@ -5,3 +5,7 @@ This repository serves as an example for KdG students for the course 'Prototypin
 
 * docs : project documentation, other than software. Software is documented in .md files next to the source code
 * hw : files for manufacturing of the case
+
+
+# Next TODO
+* show the bat and ball customer characters on the correct row and column, depending on their position
