@@ -2,9 +2,9 @@
 #include "unity.h"
 #include "encoderwheel.h"
 
-encoderWheel theWheel;
+pulseWheel theWheel;
 
-void isr(){
+void isr() {
 }
 
 void testInitialize() {
