@@ -3,7 +3,10 @@
 #include "stdint.h"
 #include "rotationdirection.h"
 
-class encoderWheel {
+// NOTE : this pulseWheel is not a real quadrature encoder. When monitoring the signals on the scope, I observed that for each step, there is a full pulse on A, 
+// and depending on the rotationDirection, B is either low or high during the falling edge of that pulse. Signals return to high afterwards..
+
+class pulseWheel {
   public:
     void initialize();
     bool positionHasChanged();

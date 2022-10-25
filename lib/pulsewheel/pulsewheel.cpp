@@ -1,15 +1,15 @@
 #include "Arduino.h"
-#include "encoderwheel.h"
+#include "pulsewheel.h"
 
 void isr();
 
-void encoderWheel::initialize() {
+void pulseWheel::initialize() {
     pinMode(pinA, INPUT_PULLUP);
     pinMode(pinB, INPUT_PULLUP);
     attachInterrupt(digitalPinToInterrupt(pinA), isr, FALLING);
 }
 
-bool encoderWheel::positionHasChanged() {
+bool pulseWheel::positionHasChanged() {
     bool result;
     noInterrupts();
     result          = positionChanged;
@@ -18,7 +18,7 @@ bool encoderWheel::positionHasChanged() {
     return result;
 }
 
-int32_t encoderWheel::getPosition() const {
+int32_t pulseWheel::getPosition() const {
     int32_t result;
     noInterrupts();
     result = position;
@@ -26,7 +26,7 @@ int32_t encoderWheel::getPosition() const {
     return result;
 }
 
-rotationDirection encoderWheel::getRotationDirection() const {
+rotationDirection pulseWheel::getRotationDirection() const {
     rotationDirection result;
     noInterrupts();
     result = theDirection;
@@ -34,13 +34,13 @@ rotationDirection encoderWheel::getRotationDirection() const {
     return result;
 }
 
-void encoderWheel::resetPosition() {
+void pulseWheel::resetPosition() {
     noInterrupts();
     position = 0;
     interrupts();
 }
 
-void encoderWheel::update() {
+void pulseWheel::update() {
     if (digitalRead(pinB)) {
         position++;
         theDirection    = rotationDirection::clockwise;
