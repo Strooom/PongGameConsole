@@ -10,7 +10,6 @@
 #define HD44780_h
 
 #include <stdint.h>        // included so 'uint8_t' etc. are defined
-#include <Wire.h>          // required in order to be able to use I2C as interface to display
 
 #define RS 0x01        // LCD Register Select is on I2C bit 0
 #define RW 0x02        // LCD ReadWrite is on I2C bit 1
@@ -113,6 +112,11 @@ class HD44780 {
     uint8_t getNmbrOfRows() const;
     uint8_t getNmbrOfCols() const;
     uint8_t getNmbrOfChars() const;
+
+    static constexpr uint8_t horizontalPixelsPerCharacter{5};
+    static constexpr uint8_t verticalPixelsPerCharacter{8};
+    static constexpr uint8_t pixelsBetweenCharacters{1};
+
 
   private:
     uint8_t ramAddressfromRowCol(uint8_t row, uint8_t col);        // calculate for each type of display, the LCD ram address, from row / col coordinates

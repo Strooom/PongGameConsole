@@ -8,6 +8,7 @@
 
 #include "HD44780.h"
 #include <Arduino.h>
+#include <Wire.h>        // required in order to be able to use I2C as interface to display
 
 HD44780::HD44780(displayType theDisplayType, uint8_t I2CAddress) : theDisplayType(theDisplayType), I2CAddress(I2CAddress)        // Constructor, pass a displayType and the I2C address
 {
