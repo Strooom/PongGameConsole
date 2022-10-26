@@ -32,13 +32,22 @@ void setup() {
 }
 
 void loop() {
-    for (uint8_t testY = 1; testY < 16; testY++) {
-        theBat.setTokensFromPixelCoordinate(testY);
-        theDisplay.setCGRam(theBat.top, batTop);
-        theDisplay.setCGRam(theBat.bottom, batBottom);
-        theDisplay.writeByteDirect(batTop, 0, 10);
-        theDisplay.writeByteDirect(batBottom, 1, 10);
-        delay(20);
+    uint8_t y = 20;
+    for (uint8_t x = ball::xMin; x < ball::xMax; x++) {
+        theBall.setTokensFromPixelCoordinates(x, y);
+
+        theDisplay.setCGRam(theBall.topLeft, ballTopLeft);
+        theDisplay.setCGRam(theBall.topRight, ballTopRight);
+        theDisplay.setCGRam(theBall.bottomLeft, ballBottomLeft);
+        theDisplay.setCGRam(theBall.bottomRight, ballBottomRight);
+
+        theDisplay.clear();
+        theDisplay.refresh();
+        theDisplay.writeByteDirect(ballTopLeft, theBall.getBottomRowFromPixelCoordinate(y) - 1, theBall.getLeftColFromPixelCoordinate(x));
+        theDisplay.writeByteDirect(ballTopRight, theBall.getBottomRowFromPixelCoordinate(y) - 1, theBall.getLeftColFromPixelCoordinate(x) + 1);
+        theDisplay.writeByteDirect(ballBottomLeft, theBall.getBottomRowFromPixelCoordinate(y), theBall.getLeftColFromPixelCoordinate(x));
+        theDisplay.writeByteDirect(ballBottomRight, theBall.getBottomRowFromPixelCoordinate(y), theBall.getLeftColFromPixelCoordinate(x) + 1);
+        delay(1500);
     }
 }
 
